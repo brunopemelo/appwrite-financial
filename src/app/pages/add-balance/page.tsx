@@ -1,5 +1,6 @@
 "use client"
 
+import { NumericFormat } from 'react-number-format';
 import LogoutButton from "@/app/components/logout/page"
 import Link from 'next/link';
 
@@ -28,10 +29,10 @@ function SkeletonLoader() {
 
 export default function Saldo() {
     const [sessionClient, setSessionClient] = useState(true);
-    const router = useRouter();
     const [formData, setFormData] = useState({ saldo: "", descricao: "" })
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const router = useRouter();
 
     useEffect(() => {
         const checkSession = async () => {
@@ -119,17 +120,19 @@ export default function Saldo() {
                                 </Label>
                             </div>
 
-                            <div className="space-y-2 ml-2">
-                                <Label>Saldo
-                                    <Input
-                                        type="text"
-                                        name="saldo"
-                                        placeholder="R$"
-                                        value={formData.saldo}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
+                            <div className="grid">
+                                <Label style={{ marginTop: 5 }}>Saldo</Label>
+                                <NumericFormat
+                                    name="saldo"
+                                    placeholder="R$"
+                                    value={formData.saldo}
+                                    thousandSeparator="."
+                                    decimalSeparator=","
+                                    prefix="R$ "
+                                    allowNegative={false}
+                                    className="py-1 px-4 border rounded-md text-sm"
+                                    onChange={handleInputChange}
+                                />
                             </div>
                         </div>
                     </CardContent>

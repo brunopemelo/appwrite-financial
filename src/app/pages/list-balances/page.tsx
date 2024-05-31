@@ -20,7 +20,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-interface IISaldos {
+interface ISaldos {
     $id: string;
     descricao: string;
     saldo: string;
@@ -39,7 +39,7 @@ function SkeletonLoader() {
 export default function Contas() {
     const [sessionClient, setSessionClient] = useState(true);
     const router = useRouter()
-    const [saldos, setSaldos] = useState<IISaldos[]>([])
+    const [saldos, setSaldos] = useState<ISaldos[]>([])
     const [spinn, setSpinn] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -95,7 +95,8 @@ export default function Contas() {
 
     const calcularSaldoTotal = () => {
         const saldoTotal = saldos.reduce((total, conta) => {
-            const valorNumerico = parseFloat(conta.saldo.replace(/\./g, '').replace(',', '.'));
+            // Remover "R$" e vírgula da string e converter para número
+            const valorNumerico = parseFloat(conta.saldo.replace('R$', '').replace('.', '').replace(',', '.'));
 
             if (!isNaN(valorNumerico)) {
                 return total + valorNumerico;
@@ -105,13 +106,17 @@ export default function Contas() {
             }
         }, 0);
 
-        return saldoTotal.toLocaleString('pt-BR', {
+        // Formatando o saldo total como moeda brasileira
+        const saldoTotalFormatado = saldoTotal.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         });
+
+        return saldoTotalFormatado;
     };
+
 
     return (
         <div className="h-screen flex justify-center items-center bg-zinc-100">
@@ -141,7 +146,14 @@ export default function Contas() {
                             {saldos?.map((saldo) => (
                                 <TableRow key={saldo.$id}>
                                     <TableCell className="text-start w-2/6">{saldo.descricao}</TableCell>
-                                    <TableCell className="text-start w-1/6">{saldo.saldo}</TableCell>
+                                    <TableCell className="text-start w-1/6">
+                                        {parseFloat(saldo.saldo.replace('R$', '').replace('.', '').replace(',', '.')).toLocaleString('pt-BR', {
+                                            style: 'currency',
+                                            currency: 'BRL',
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                        })}
+                                    </TableCell>
                                     <TableCell className="text-center w-1/12">
                                         <div className="flex justify-center items-center">
                                             <Link href={`/pages/list-balances/${saldo.$id}`}>
@@ -185,7 +197,7 @@ export default function Contas() {
                     </CardFooter>
                 </div>
             ) : (
-                <p>Não há saldos cadastrados!<Link href="/pages/add-balance" className="button bg-green-600 text-white p-2 rounded-md ml-2">Voltar</Link></p>
+                <p className="font-bold">Não há saldos cadastrados!<Link href="/pages/add-balance" className="button bg-green-600 text-white p-2 rounded-md ml-2">Voltar</Link></p>
             )}
         </div>
     )

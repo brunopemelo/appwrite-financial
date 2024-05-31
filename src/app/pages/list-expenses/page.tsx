@@ -123,7 +123,7 @@ export default function Contas() {
 
     const calcularValorTotal = () => {
         const valorTotal = contas.reduce((total, conta) => {
-            const valorNumerico = parseFloat(conta.valor.replace(/\./g, '').replace(',', '.'));
+            const valorNumerico = parseFloat(conta.valor.replace(',', '.'));
 
             if (!isNaN(valorNumerico)) {
                 return total + valorNumerico;
@@ -143,7 +143,8 @@ export default function Contas() {
 
     const calcularSaldoTotal = () => {
         const saldoTotal = saldos.reduce((total, conta) => {
-            const valorNumerico = parseFloat(conta.saldo.replace(/\./g, '').replace(',', '.'));
+            // Remover "R$" e vírgula da string e converter para número
+            const valorNumerico = parseFloat(conta.saldo.replace('R$', '').replace('.', '').replace(',', '.'));
 
             if (!isNaN(valorNumerico)) {
                 return total + valorNumerico;
@@ -153,12 +154,15 @@ export default function Contas() {
             }
         }, 0);
 
-        return saldoTotal.toLocaleString('pt-BR', {
+        // Formatando o saldo total como moeda brasileira
+        const saldoTotalFormatado = saldoTotal.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         });
+
+        return saldoTotalFormatado;
     };
 
     const calcularTotalGeral = () => {
@@ -209,7 +213,7 @@ export default function Contas() {
                             {contas?.map((conta) => (
                                 <TableRow key={conta.$id}>
                                     <TableCell className="text-start w-2/6">{conta.contas}</TableCell>
-                                    <TableCell className="text-center w-1/6">{conta.valor}</TableCell>
+                                    <TableCell className="text-center w-1/6">R$ {parseFloat(conta.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</TableCell>
                                     <TableCell className="text-center w-1/6">{conta.parcelas}</TableCell>
                                     <TableCell className="text-center w-1/12">
                                         <div className="flex justify-center items-center">

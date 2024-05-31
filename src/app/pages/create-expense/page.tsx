@@ -1,5 +1,6 @@
 "use client"
 
+import { NumericFormat } from 'react-number-format';
 import LogoutButton from "@/app/components/logout/page"
 import Link from 'next/link';
 
@@ -117,17 +118,19 @@ export default function Page() {
                             </Label>
                         </div>
                         <div className="flex justify-between">
-                            <div className="space-y-2">
-                                <Label>Valor
-                                    <Input
-                                        type="text"
-                                        name="valor"
-                                        placeholder="R$"
-                                        value={formData.valor}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
+                            <div className="grid">
+                                <Label style={{ marginTop: 5 }}>Valor</Label>
+                                <NumericFormat
+                                    name="valor"
+                                    placeholder="R$"
+                                    value={formData.valor}
+                                    thousandSeparator="."
+                                    decimalSeparator=","
+                                    prefix="R$ "
+                                    allowNegative={false}
+                                    className="py-1 px-4 border rounded-md text-sm"
+                                    onValueChange={({ value }) => setFormData(prevData => ({ ...prevData, valor: value }))}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <Label>Número de Parcelas
