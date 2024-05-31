@@ -1,7 +1,6 @@
 'use client'
 
 import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -10,10 +9,6 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default function Home() {
-    const searchParams = useSearchParams()
-
-    const error = searchParams.get("error")
-
     async function login(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
