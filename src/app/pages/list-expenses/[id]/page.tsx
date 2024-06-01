@@ -1,5 +1,6 @@
 "use client"
 
+import { NumericFormat } from 'react-number-format';
 import Link from 'next/link';
 
 import { useRouter } from "next/navigation"
@@ -128,32 +129,34 @@ export default function EditExpense({ params }: { params: { id: string } }) {
                                 />
                             </Label>
                         </div>
-                        <div className="flex justify-between">
-                            <div className="space-y-2">
-                                <Label>Valor
-                                    <Input
-                                        type="text"
-                                        name="valor"
-                                        placeholder="R$"
-                                        value={formData.valor}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Número de Parcelas
-                                    <Input
-                                        type="text"
-                                        name="parcelas"
-                                        placeholder="1"
-                                        maxLength={2}
-                                        value={formData.parcelas}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
+
+                        <div className="grid">
+                            <Label style={{ marginTop: 5 }}>Valor</Label>
+                            <NumericFormat
+                                type="text"
+                                name="valor"
+                                placeholder="R$"
+                                value={formData.valor}
+                                thousandSeparator="."
+                                decimalSeparator=","
+                                prefix="R$ "
+                                allowNegative={false}
+                                className="py-2 px-4 border rounded-md text-sm mt-1"
+                                onValueChange={({ value }) => setFormData(prevData => ({ ...prevData, valor: value }))}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Número de Parcelas
+                                <Input
+                                    type="text"
+                                    name="parcelas"
+                                    placeholder="1"
+                                    maxLength={2}
+                                    value={formData.parcelas}
+                                    className="py-4 px-4 border rounded-md"
+                                    onChange={handleInputChange}
+                                />
+                            </Label>
                         </div>
                     </CardContent>
 

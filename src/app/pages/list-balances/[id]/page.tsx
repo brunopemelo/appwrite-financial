@@ -1,5 +1,6 @@
 "use client"
 
+import { NumericFormat } from 'react-number-format';
 import Link from 'next/link';
 
 import { useRouter } from "next/navigation"
@@ -116,32 +117,33 @@ export default function EditBalance({ params }: { params: { id: string } }) {
                         <CardTitle className="text-2xl">Alterar Saldo</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <div className="flex justify-between">
-                            <div className="space-y-2">
-                                <Label>Descrição
-                                    <Input
-                                        type="text"
-                                        name="descricao"
-                                        placeholder="Salário"
-                                        value={formData.descricao}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
+                        <div className="space-y-2">
+                            <Label>Descrição
+                                <Input
+                                    type="text"
+                                    name="descricao"
+                                    placeholder="Salário"
+                                    value={formData.descricao}
+                                    className="py-4 px-4 border rounded-md"
+                                    onChange={handleInputChange}
+                                />
+                            </Label>
+                        </div>
 
-                            <div className="space-y-2 ml-2">
-                                <Label>Saldo
-                                    <Input
-                                        type="text"
-                                        name="saldo"
-                                        placeholder="R$"
-                                        value={formData.saldo}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
+                        <div className="grid">
+                            <Label style={{ marginTop: 5 }}>Saldo</Label>
+                            <NumericFormat
+                                type="text"
+                                name="saldo"
+                                placeholder="R$"
+                                value={formData.saldo}
+                                thousandSeparator="."
+                                decimalSeparator=","
+                                prefix="R$ "
+                                allowNegative={false}
+                                className="py-2 px-4 border rounded-md text-sm mt-1"
+                                onChange={handleInputChange}
+                            />
                         </div>
                     </CardContent>
 

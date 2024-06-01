@@ -117,34 +117,32 @@ export default function Page() {
                                 />
                             </Label>
                         </div>
-                        <div className="flex justify-between">
-                            <div className="grid">
-                                <Label style={{ marginTop: 5 }}>Valor</Label>
-                                <NumericFormat
-                                    name="valor"
-                                    placeholder="R$"
-                                    value={formData.valor}
-                                    thousandSeparator="."
-                                    decimalSeparator=","
-                                    prefix="R$ "
-                                    allowNegative={false}
-                                    className="py-1 px-4 border rounded-md text-sm"
-                                    onValueChange={({ value }) => setFormData(prevData => ({ ...prevData, valor: value }))}
+                        <div className="space-y-2 grid">
+                            <Label style={{ marginTop: 5 }}>Valor</Label>
+                            <NumericFormat
+                                name="valor"
+                                placeholder="R$"
+                                value={formData.valor}
+                                thousandSeparator="."
+                                decimalSeparator=","
+                                prefix="R$ "
+                                allowNegative={false}
+                                className="py-1 px-4 border rounded-md text-sm"
+                                onValueChange={({ value }) => setFormData(prevData => ({ ...prevData, valor: value }))}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Número de Parcelas
+                                <Input
+                                    type="text"
+                                    name="parcelas"
+                                    placeholder="1"
+                                    maxLength={2}
+                                    value={formData.parcelas}
+                                    className="py-4 px-4 border rounded-md"
+                                    onChange={handleInputChange}
                                 />
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Número de Parcelas
-                                    <Input
-                                        type="text"
-                                        name="parcelas"
-                                        placeholder="1"
-                                        maxLength={2}
-                                        value={formData.parcelas}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
+                            </Label>
                         </div>
                     </CardContent>
 
@@ -166,7 +164,7 @@ export default function Page() {
                                 </Button>
                             </Link>
 
-                            <Link href="/pages/list-expenses" passHref className="ml-3">
+                            <Link href="/pages/list-expenses" passHref className="ml-1">
                                 <Button className="button bg-red-400 text-white">
                                     Despesas<ArrowRightIcon className="ml-2 h-4 w-4" />
                                 </Button>
@@ -175,7 +173,7 @@ export default function Page() {
                     </CardFooter>
                 </Card>
             </form>
-        </div>
+        </div >
     )
 }
 

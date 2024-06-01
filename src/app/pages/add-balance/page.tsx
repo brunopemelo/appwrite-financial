@@ -106,34 +106,32 @@ export default function Saldo() {
                     </CardHeader>
 
                     <CardContent className="space-y-4">
-                        <div className="flex justify-between">
-                            <div className="space-y-2">
-                                <Label>Descrição
-                                    <Input
-                                        type="text"
-                                        name="descricao"
-                                        placeholder="Salário"
-                                        value={formData.descricao}
-                                        className="py-4 px-4 border rounded-md"
-                                        onChange={handleInputChange}
-                                    />
-                                </Label>
-                            </div>
-
-                            <div className="grid">
-                                <Label style={{ marginTop: 5 }}>Saldo</Label>
-                                <NumericFormat
-                                    name="saldo"
-                                    placeholder="R$"
-                                    value={formData.saldo}
-                                    thousandSeparator="."
-                                    decimalSeparator=","
-                                    prefix="R$ "
-                                    allowNegative={false}
-                                    className="py-1 px-4 border rounded-md text-sm"
+                        <div className="space-y-2">
+                            <Label>Descrição
+                                <Input
+                                    type="text"
+                                    name="descricao"
+                                    placeholder="Salário"
+                                    value={formData.descricao}
+                                    className="py-4 px-4 border rounded-md"
                                     onChange={handleInputChange}
                                 />
-                            </div>
+                            </Label>
+                        </div>
+
+                        <div className="grid">
+                            <Label style={{ marginTop: 5 }}>Saldo</Label>
+                            <NumericFormat
+                                name="saldo"
+                                placeholder="R$"
+                                value={formData.saldo}
+                                thousandSeparator="."
+                                decimalSeparator=","
+                                prefix="R$ "
+                                allowNegative={false}
+                                className="py-1 px-4 border rounded-md text-sm mt-1"
+                                onChange={handleInputChange}
+                            />
                         </div>
                     </CardContent>
 
@@ -155,9 +153,9 @@ export default function Saldo() {
                                 </Button>
                             </Link>
 
-                            <Link href="/pages/list-balances" passHref className="ml-3">
+                            <Link href="/pages/list-balances" passHref className="ml-1">
                                 <Button className="button bg-green-600 text-white">
-                                    Saldos Cadastrados<ArrowRightIcon className="ml-2 h-4 w-4" />
+                                    Saldos<ArrowRightIcon className="ml-2 h-4 w-4" />
                                 </Button>
                             </Link>
                         </div>
