@@ -131,7 +131,7 @@ export default function Contas() {
                 <p className="font-bold text-black text-lg">Carregando saldo...</p>
             ) : saldos?.length > 0 ? (
 
-                <div className="p-6 w-full max-w-xl shadow-2xl rounded-xl bg-white">
+                <div className="p-4 w-full max-w-xl shadow-2xl rounded-xl bg-white">
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -180,12 +180,6 @@ export default function Contas() {
                         <Link href="/pages/add-balance" passHref>
                             <Button className="button bg-green-600 text-white p-3">
                                 <ArrowLeftIcon className="mr-2 h-4 w-4" />Saldo
-                            </Button>
-                        </Link>
-
-                        <Link href="/pages/list-expenses" passHref className="ml-1">
-                            <Button className="button bg-red-400 text-white">
-                                Despesas<ArrowRightIcon className="mr-2 h-4 w-4" />
                             </Button>
                         </Link>
                     </CardFooter>

@@ -193,8 +193,8 @@ export default function Contas() {
             {isLoading ? (
                 <p className="font-bold text-black text-lg">Carregando contas...</p>
             ) : contas?.length > 0 ? (
-                <div className="p-6 w-full max-w-xl shadow-2xl rounded-xl bg-white">
-                    <div style={{maxHeight: 600}} className="overflow-auto">
+                <div className="p-4 w-full max-w-xl shadow-2xl rounded-xl bg-white">
+                    <div style={{ maxHeight: 600 }} className="overflow-auto">
                         <Table>
                             <TableHeader>
                                 <TableRow>

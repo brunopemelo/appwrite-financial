@@ -1,7 +1,6 @@
 "use client"
 
 import { NumericFormat } from 'react-number-format';
-import LogoutButton from "@/app/components/logout/page"
 import Link from 'next/link';
 
 import { useState, useEffect, ChangeEvent } from "react"
@@ -144,21 +143,17 @@ export default function Saldo() {
                     {error && <p className="text-red-500 font-bold text-sm mb-6 flex justify-center items-center">{error}</p>}
 
                     <CardFooter className="flex justify-between">
-                        <LogoutButton />
+                        <Link href="/pages/list-expenses" passHref>
+                            <Button className="button bg-red-400 text-white p-3">
+                                <ArrowLeftIcon className="mr-2 h-4 w-4" />Despesas
+                            </Button>
+                        </Link>
 
-                        <div className="flex">
-                            <Link href="/pages/list-expenses" passHref>
-                                <Button className="button bg-red-400 text-white p-3">
-                                    <ArrowLeftIcon className="mr-2 h-4 w-4" />Despesas
-                                </Button>
-                            </Link>
-
-                            <Link href="/pages/list-balances" passHref className="ml-1">
-                                <Button className="button bg-green-600 text-white">
-                                    Saldos<ArrowRightIcon className="ml-2 h-4 w-4" />
-                                </Button>
-                            </Link>
-                        </div>
+                        <Link href="/pages/list-balances" passHref className="ml-1">
+                            <Button className="button bg-green-600 text-white">
+                                Saldos<ArrowRightIcon className="ml-2 h-4 w-4" />
+                            </Button>
+                        </Link>
                     </CardFooter>
                 </Card>
             </form>
